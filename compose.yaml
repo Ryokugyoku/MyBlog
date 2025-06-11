@@ -1,0 +1,23 @@
+services:
+  blog-app:
+    build: .
+    container_name: blog-app
+    ports:
+      - "8081:8080"   # ホスト:コンテナ
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+    restart: unless-stopped
+  db:
+    image: postgres:16-alpine
+    container_name: local-postgres
+    environment:
+      POSTGRES_DB: myapp        # 任意の DB 名
+      POSTGRES_USER: myuser     # 任意のユーザ
+      POSTGRES_PASSWORD: mypass # 任意のパスワード
+    ports:
+      - "5432:5432"             # 必要ならホスト側ポートは変更可
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:

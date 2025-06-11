@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="layout(content,pageTitle)">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle} ?: 'MyBlog'">MyBlog</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+  <!-- ヘッダー -->
+  <div th:replace="~{fragments/header :: header}"></div>
+
+  <div class="container">
+      <!-- サイドバー -->
+      <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+      <!-- メインコンテンツ -->
+      <main th:insert="${content}"></main>
+  </div>
+
+  <!-- フッター -->
+  <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

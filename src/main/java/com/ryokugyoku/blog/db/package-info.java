@@ -1,0 +1,1 @@
+package com.ryokugyoku.blog.db;

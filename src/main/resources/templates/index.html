@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::section}, #{page.title})}"> <!-- ★ 変更：'トップページ' → #{page.title} -->
+
+<section>
+    <h2>トップページ</h2>
+    <p>ここにメインコンテンツを配置します。</p>
+</section>
+
+</html>

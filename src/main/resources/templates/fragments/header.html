@@ -1,0 +1,8 @@
+<!-- templates/fragments/header.html -->
+<nav th:fragment="header">
+  <div class="logo"><a th:href="@{/}">MyBlog</a></div>
+  <ul class="menu">
+    <li><a th:href="@{/posts}">投稿一覧</a></li>
+    <li><a th:href="@{/about}">About</a></li>
+  </ul>
+</nav>

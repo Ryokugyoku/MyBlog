@@ -1,0 +1,18 @@
+<footer th:fragment="footer" class="theme-ryokugyoku-footer">
+  <p th:text="#{footer.copyright}">© 2025 Ryokugyoku Blog</p>
+
+  <!-- 言語切替プルダウン -->
+  <nav class="lang-switcher">
+    <select id="lang-select"
+            name="lang"
+            th:onchange="|location.href='?lang=' + this.value|">
+
+      <option th:each="loc : ${@localizeService.getSupportedLocales()}"
+              th:value="${loc == T(java.util.Locale).ROOT ? '' : loc.toLanguageTag()}"
+              th:selected="${loc == #locale}"
+              th:text="${loc == T(java.util.Locale).ROOT} ? #{label.default-lang} : ${loc.getDisplayLanguage(#locale)}">
+        Default
+      </option>
+    </select>
+  </nav>
+</footer>
