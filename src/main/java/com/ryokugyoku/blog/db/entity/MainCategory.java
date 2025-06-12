@@ -7,8 +7,7 @@ import lombok.*;
  * @author Ryokugyoku
  * */
 @Entity
-@Table(name = "main_category",
-        indexes = @Index(name = "idx_article_published", columnList = "publishedAt"))
+@Table(name = "main_category")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class MainCategory {
     @Id

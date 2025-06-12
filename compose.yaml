@@ -1,4 +1,21 @@
 services:
+  db:
+    image: postgres:16-alpine
+    container_name: local-postgres
+    environment:
+      POSTGRES_DB: myapp
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypass
+    ports:
+      - "5432:5432"             # 必要ならホスト側ポートは変更可
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER" ]
+      interval: 5s
+      retries: 5
+
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
   blog-app:
     build: .
     container_name: blog-app
@@ -6,18 +23,15 @@ services:
       - "8081:8080"   # ホスト:コンテナ
     environment:
       SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/myapp?sslmode=disable
+      SPRING_DATASOURCE_USERNAME: myuser
+      SPRING_DATASOURCE_PASSWORD: mypass
+
     restart: unless-stopped
-  db:
-    image: postgres:16-alpine
-    container_name: local-postgres
-    environment:
-      POSTGRES_DB: myapp        # 任意の DB 名
-      POSTGRES_USER: myuser     # 任意のユーザ
-      POSTGRES_PASSWORD: mypass # 任意のパスワード
-    ports:
-      - "5432:5432"             # 必要ならホスト側ポートは変更可
-    volumes:
-      - db-data:/var/lib/postgresql/data
+
+    depends_on:
+      db:
+        condition: service_healthy
 
 volumes:
   db-data:
