@@ -1,8 +1,24 @@
 <!-- templates/fragments/header.html -->
-<nav th:fragment="header">
-  <div class="logo"><a th:href="@{/}">MyBlog</a></div>
-  <ul class="menu">
-    <li><a th:href="@{/posts}">投稿一覧</a></li>
-    <li><a th:href="@{/about}">About</a></li>
-  </ul>
+<nav th:fragment="header" class="site-header">
+  <div class="header-inner">
+
+    <!-- ロゴ -->
+    <div class="logo">
+      <a th:href="@{/}">MyBlog</a>
+    </div>
+
+    <!-- ハンバーガーボタン（モバイル用） -->
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="hamburger">
+      <span></span><span></span><span></span>
+    </label>
+
+    <!-- メニュー -->
+    <ul class="menu">
+      <li><a th:href="@{/posts}">投稿一覧</a></li>
+      <li><a th:href="@{/about}">About</a></li>
+    </ul>
+
+  </div>
+</nav>
 </nav>

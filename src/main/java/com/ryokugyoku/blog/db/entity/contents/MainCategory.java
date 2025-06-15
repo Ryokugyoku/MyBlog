@@ -1,4 +1,4 @@
-package com.ryokugyoku.blog.db.entity;
+package com.ryokugyoku.blog.db.entity.contents;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -23,6 +23,11 @@ public class MainCategory {
 
     @Column(nullable = false)
     private String nameEs;
+
+    /* ---------- 追加：ロケール毎に動的設定されるフィールド ---------- */
+    @Transient                // DB へは保存しない
+    private String name;      // 画面表示用
+
 
     public int getId() {
         return id;

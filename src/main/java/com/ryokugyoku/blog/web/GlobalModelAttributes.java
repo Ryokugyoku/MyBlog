@@ -1,5 +1,7 @@
 package com.ryokugyoku.blog.web;
 
+import com.ryokugyoku.blog.db.entity.contents.MainCategory;
+import com.ryokugyoku.blog.db.service.MainCategoryService;
 import com.ryokugyoku.blog.service.LocalizeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,11 +14,26 @@ import java.util.List;
 public class GlobalModelAttributes {
     private final LocalizeService localizeService;
 
-    /** すべてのビューで利用できる言語タグ一覧をモデルに追加 */
+    /**
+     * フッターの言語切り替え処理
+     * */
     @ModelAttribute("supportedLangTags")
     public List<String> supportedLangTags() {
-        List<String> langTags = localizeService.getSupportedLanguageTags();
-        return langTags;
+        return localizeService.getSupportedLanguageTags();
     }
+
+    /**
+     * サイドバー項目用を取得するためのサービス
+     * */
+    private final MainCategoryService mainCategoryService;
+
+    /**
+     * サイドバー用カテゴリーリスト
+     */
+    @ModelAttribute("mainCategories")
+    public List<MainCategory> mainCategories() {
+        return mainCategoryService.getAllForSidebar();
+    }
+
 
 }

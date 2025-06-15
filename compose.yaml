@@ -1,9 +1,9 @@
 services:
   db:
-    image: postgres:16-alpine
+    image: postgres:latest
     container_name: local-postgres
     environment:
-      POSTGRES_DB: myapp
+      POSTGRES_DB: blog
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypass
     ports:

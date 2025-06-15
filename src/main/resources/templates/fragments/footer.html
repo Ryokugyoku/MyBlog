@@ -1,25 +1,27 @@
-<footer th:fragment="footer">
-  <!-- メッセージ式(#{…}) と 変数式(${…}) を同じ EL の中で混在させると
-       SpEL がパース出来ず例外になります。
-       まずメッセージを変数 defaultLang に取り込み、
-       その変数を三項演算子で参照するように修正しました。 -->
+<footer th:fragment="footer" class="site-footer">
+  <div class="footer-inner">
 
-  <form
-  method="get"
-  th:with="defaultLang=#{label.default-lang}">
-    <select name="lang"
-            onchange="this.form.submit()"
-            class="lang-select">
-      <option th:each="tag : ${supportedLangTags}"
-              th:value="${tag}"
-      th:text="${tag == '' ? defaultLang
-      : T(java.util.Locale).forLanguageTag(tag)
-      .getDisplayLanguage(#locale)}"
-      th:selected="${(#locale.toLanguageTag() == '' ? '' : #locale.toLanguageTag()) == tag}">
-      </option>
-    </select>
-  </form>
+    <!-- コピーライト -->
+    <p class="copyright" th:text="#{footer.copyright}">
+      © 2025 Ryokugyoku Blog
+    </p>
 
+    <!-- 言語切替 ---------------------------- -->
+    <form method="get"
+          th:with="defaultLang=#{label.default-lang}"
+          class="lang-form">
+      <select name="lang"
+              onchange="this.form.submit()"
+              class="lang-select">
+        <option th:each="tag : ${supportedLangTags}"
+                th:value="${tag}"
+                th:text="${tag == '' ? defaultLang
+                           : T(java.util.Locale).forLanguageTag(tag)
+                             .getDisplayLanguage(#locale)}"
+                th:selected="${(#locale.toLanguageTag() == '' ? '' : #locale.toLanguageTag()) == tag}">
+        </option>
+      </select>
+    </form>
 
-  <p th:text="#{footer.copyright}">© 2025 Ryokugyoku Blog</p>
+  </div>
 </footer>

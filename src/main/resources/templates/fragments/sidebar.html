@@ -1,8 +1,15 @@
-<!-- templates/fragments/sidebar.html -->
-<aside th:fragment="sidebar">
-  <h3>カテゴリー</h3>
-  <ul>
-    <li><a th:href="@{/category/spring}">Spring</a></li>
-    <li><a th:href="@{/category/java}">Java</a></li>
-  </ul>
+<aside th:fragment="sidebar" class="sidebar">
+  <div class="sidebar-inner">
+    <h3 class="sidebar-title">カテゴリー</h3>
+
+    <ul class="sidebar-menu">
+      <!-- DB から取得したリストをループ -->
+      <li th:each="cat : ${mainCategories}">
+        <a th:href="@{|/category/${cat.id}|}"
+           th:text="${cat.name}">
+          category
+        </a>
+      </li>
+    </ul>
+  </div>
 </aside>

@@ -47,6 +47,8 @@ public class LocalizeService {
             }
         }
 
+        //デフォルトが英語のため、英語を追加
+        detected.add(Locale.ENGLISH);
         return detected.stream()
                 .sorted(Comparator.comparing(Locale::toString))
                 .toList();
